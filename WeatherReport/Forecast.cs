@@ -9,75 +9,75 @@ namespace WeatherReport
 {
     internal class Forecast
     {
-        public static int Days = 7;
-        public static int count = 1;
-
-        public static List<IWeather> MegaList = new List<IWeather>();
-
-
-        public static void GenerateWeeklyForecast(List<IWeather> cityList, string city, Reykjavik theCity)
+        public static void GenerateWeeklyForecasts()
         {
-            for (int i = 0; i < Days; i++)
+            for (int i = 0; i < 7; i++)
             {
-                var randomNumber = RandomNumberHandler.GenerateRandomWeatherType();
-
-                switch (randomNumber)
-                {
-                    case 1: cityList.Add(new SunnyDay(city, theCity.DayNumber)); break;
-                    case 2: cityList.Add(new RainyDay(city)); break;
-                    case 3: cityList.Add(new CloudyDay(city)); break;
-                    case 4: cityList.Add(new SnowyDay(city)); break;
-                    default: break;
-
-                }
-
+                new ReykjavikForecast(GetWeatherType());
+                new RigaForecast(GetWeatherType());
+                new LasPalmasForecast(GetWeatherType());
             }
         }
-        /*
-        public static void GenerateWeeklyForecast(List<IWeather> cityList, string city)
+        public static IWeather GetWeatherType()
         {
-            for (int i = 0; i < Days; i++)
+            var randomNumber = RandomNumberHandler.GenerateRandomWeatherType();
+
+            switch (randomNumber)
             {
-                var randomNumber = RandomNumberHandler.GenerateRandomWeatherType();
+                case 1: return new SunnyDay(); break;
+                case 2: return new RainyDay(); break;
+                case 3: return new SnowyDay(); break;
+                case 4: return new CloudyDay(); break;
 
-                switch (randomNumber)
-                {
-                    case 1: cityList.Add(new SunnyDay(city)); break;
-                    case 2: cityList.Add(new RainyDay(city)); break;
-                    case 3: cityList.Add(new CloudyDay(city)); break;
-                    case 4: cityList.Add(new SnowyDay(city)); break;
-                    default: break;
-
-                }
-
-            }
-        }
-        */
-        public static void PrintForecast(List<IWeather> cityList)
-        {
-            
-            //Show the 7 days
-            foreach (var weather in cityList)
-            {
-                Console.WriteLine($"[{weather.City}] Day {weather.DayNumber}: {weather.TypeOfWeather}, Temp: {weather.Temperature}°C");
-                count++;
+                default: return null; break;
             }
         }
 
-
-
-
-        public static void PrintOnlyByWeather(string weatherType)
+        public static void PrintWeeklyForecast()
         {
-          
+            Console.WriteLine("1: Reyjkjavik, 2: Riga, 3: LasPalmas");
+            int val = int.Parse(Console.ReadLine());
 
-            foreach (var weather in Reykjavik.ReykjavikList)
+            switch (val)
             {
-                if (weather.TypeOfWeather == weatherType)
-                    Console.WriteLine($"[{weather.City}] Day {count}: {weather.TypeOfWeather}, Temp: {weather.Temperature}°C");
+                case 1:
+                    foreach (ReykjavikForecast item in ReykjavikForecast.ReykjavikList)
+                        Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                    break;
+
+                case 2:
+                    foreach (RigaForecast item in RigaForecast.RigaList)
+                        Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                    break;
+                case 3:
+                    foreach (LasPalmasForecast item in LasPalmasForecast.LasPalmasList)
+                        Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                    break;
+
+                default:
+                    break;
             }
 
         }
+        public static void PrintForecastByWeather(string weather)
+        {
+            Console.Clear();
 
+            Console.WriteLine($"City and Day when it is {weather} weather");
+            Console.WriteLine();
+
+            foreach (ReykjavikForecast item in ReykjavikForecast.ReykjavikList)
+                if (item.Weathertype.TypeOfWeather == weather)
+                    Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+            foreach (RigaForecast item in RigaForecast.RigaList)
+                if (item.Weathertype.TypeOfWeather == weather)
+                    Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+            foreach (LasPalmasForecast item in LasPalmasForecast.LasPalmasList)
+                if (item.Weathertype.TypeOfWeather == weather)
+                    Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+
+        }
     }
 }
+
+    

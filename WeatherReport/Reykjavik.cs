@@ -6,16 +6,26 @@ using System.Threading.Tasks;
 
 namespace WeatherReport
 {
-    internal class Reykjavik : Cities
+    internal class ReykjavikForecast : Cities
 
     {
-        public static int count;
+        public IWeather Weathertype { get; set; }
 
-        public static List<IWeather> ReykjavikList = new List<IWeather>();
+        public ReykjavikForecast(IWeather weatherType)
+        {
+            this.Weathertype = weatherType;
+            DayNumber = count++;
+            ReykjavikList.Add(this);
+            
+            WeatherInformation.MegaList.Add(this);  
+           
+        }
 
-        public static string CityName { get => WeatherInformation.Cities[0]; }
+        public static int count = 1;
+        public  string CityName { get => WeatherInformation.Cities[0]; }
+        public int DayNumber { get; set; }
 
-        public int DayNumber { get => count; }
+        public static List<Cities> ReykjavikList = new List<Cities>();
 
 
 

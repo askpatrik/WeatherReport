@@ -9,11 +9,18 @@ namespace WeatherReport
 
         static void Main(string[] args)
         {
-           Forecast.GenerateWeeklyForecast(Reykjavik.ReykjavikList, Reykjavik.CityName, new Reykjavik());
-           Forecast.PrintForecast(Reykjavik.ReykjavikList);
+            Account.CreateAccount();
+            Account.PrintAccountDetails();  
 
-            //Dag! 
-           Forecast.PrintOnlyByWeather(WeatherInformation.WeatherTypes["SunnyDay"]);
+
+            Forecast.GenerateWeeklyForecasts();
+
+            
+            Forecast.PrintForecastByWeather("Sunny");
+         
+          
+
+
 
 
 

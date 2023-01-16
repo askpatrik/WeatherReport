@@ -10,10 +10,7 @@ namespace WeatherReport
     {
        public int Temperature { get; }
        public string TypeOfWeather { get; }        
-       public int DayNumber { get; }      
-       public string City { get; }
        
-       //public string CurrentCity { get; }   
 
     }
 }

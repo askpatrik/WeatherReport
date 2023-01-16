@@ -8,6 +8,9 @@ namespace WeatherReport
 {
     internal class WeatherInformation
     {
+
+        public static List<Cities> MegaList = new List<Cities>();
+
         internal static Dictionary<string,string> WeatherTypes = new Dictionary<string,string>()
         {
             {"SunnyDay", "Sunny"},
