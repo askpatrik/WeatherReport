@@ -8,6 +8,18 @@ namespace WeatherReport
 {
     internal class WeatherInformation
     {
-       // Dictionary<IWeather> 
+        internal static Dictionary<string,string> WeatherTypes = new Dictionary<string,string>()
+        {
+            {"SunnyDay", "Sunny"},
+            {"RainyDay", "Rainy"},
+            {"CloudyDay", "Cloudy"},
+            {"SnowyDay", "Snowy"}
+        };
+        internal static List<string> Cities = new List<string>()
+        {
+            {"Reykjavik"},
+            {"LasPalmas"},
+            {"Riga"},        
+        };
     }
 }

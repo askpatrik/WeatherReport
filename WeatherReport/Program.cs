@@ -1,23 +1,22 @@
 ﻿using System;
+using System.Dynamic;
 
 namespace WeatherReport
 {
     internal class Program
     {
 
-          
+
         static void Main(string[] args)
         {
-            
+           Forecast.GenerateWeeklyForecast(Reykjavik.ReykjavikList, Reykjavik.CityName, new Reykjavik());
+           Forecast.PrintForecast(Reykjavik.ReykjavikList);
 
-            int count = 1;
-            Forecast.GenerateForecast();
+            //Dag! 
+           Forecast.PrintOnlyByWeather(WeatherInformation.WeatherTypes["SunnyDay"]);
 
-            foreach (var day in Forecast.listOfDays)
-            {
-                Console.WriteLine($"Day {count}: {day.TypeOfWeather}, Temperature: {day.Temperature}");
-                count++;
-            }
+
+
         }
     }
 }

@@ -7,28 +7,76 @@ using System.Threading.Tasks;
 
 namespace WeatherReport
 {
-    internal class Forecast     
+    internal class Forecast
     {
         public static int Days = 7;
-        public static List<IWeather> listOfDays = new List<IWeather>();
-        //7 day forecast randomizses betwwen sunnyday, rainyday
+        public static int count = 1;
 
-        public static void GenerateForecast()
-        {
-            for (int i = 0; i < Days; i++)           
-                AddWeatherDay();           
-        }
-        public static void AddWeatherDay()
-        {
-            var choice = RandomNumberHandler.GenerateRandomNumber();
+        public static List<IWeather> MegaList = new List<IWeather>();
 
-            switch (choice)
+
+        public static void GenerateWeeklyForecast(List<IWeather> cityList, string city, Reykjavik theCity)
+        {
+            for (int i = 0; i < Days; i++)
             {
-                case 1: listOfDays.Add(new SunnyDay()); break;
-                case 2: listOfDays.Add(new RainyDay()); break;
-                default:
-                    break;
+                var randomNumber = RandomNumberHandler.GenerateRandomWeatherType();
+
+                switch (randomNumber)
+                {
+                    case 1: cityList.Add(new SunnyDay(city, theCity.DayNumber)); break;
+                    case 2: cityList.Add(new RainyDay(city)); break;
+                    case 3: cityList.Add(new CloudyDay(city)); break;
+                    case 4: cityList.Add(new SnowyDay(city)); break;
+                    default: break;
+
+                }
+
             }
+        }
+        /*
+        public static void GenerateWeeklyForecast(List<IWeather> cityList, string city)
+        {
+            for (int i = 0; i < Days; i++)
+            {
+                var randomNumber = RandomNumberHandler.GenerateRandomWeatherType();
+
+                switch (randomNumber)
+                {
+                    case 1: cityList.Add(new SunnyDay(city)); break;
+                    case 2: cityList.Add(new RainyDay(city)); break;
+                    case 3: cityList.Add(new CloudyDay(city)); break;
+                    case 4: cityList.Add(new SnowyDay(city)); break;
+                    default: break;
+
+                }
+
+            }
+        }
+        */
+        public static void PrintForecast(List<IWeather> cityList)
+        {
+            
+            //Show the 7 days
+            foreach (var weather in cityList)
+            {
+                Console.WriteLine($"[{weather.City}] Day {weather.DayNumber}: {weather.TypeOfWeather}, Temp: {weather.Temperature}°C");
+                count++;
+            }
+        }
+
+
+
+
+        public static void PrintOnlyByWeather(string weatherType)
+        {
+          
+
+            foreach (var weather in Reykjavik.ReykjavikList)
+            {
+                if (weather.TypeOfWeather == weatherType)
+                    Console.WriteLine($"[{weather.City}] Day {count}: {weather.TypeOfWeather}, Temp: {weather.Temperature}°C");
+            }
+
         }
 
     }

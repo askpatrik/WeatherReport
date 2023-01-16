@@ -11,9 +11,9 @@ namespace WeatherReport
         internal static Random random = new Random();
         internal static int randomNumber = random.Next(1, 5);
 
-        internal static int GenerateRandomNumber()
+        internal static int GenerateRandomWeatherType()
         {
-            randomNumber = random.Next(1, 3);
+            randomNumber = random.Next(1, 5);
             return randomNumber;
         }
         internal static int GenerateRandomTemperature(IWeather weatherType)
@@ -22,13 +22,11 @@ namespace WeatherReport
             {
                 case SunnyDay: randomNumber = random.Next(15, 28); break;
                 case RainyDay: randomNumber = random.Next(10, 18); break;
-                default:
-                    break;
-            }
-            //if get Type = SunnyDay ... 
-            
+                case CloudyDay: randomNumber = random.Next(15, 22); break;
+                case SnowyDay: randomNumber = random.Next(-15, -1); break;
+                default: break;
+            }      
             return randomNumber;
-
         }
     }
 }
