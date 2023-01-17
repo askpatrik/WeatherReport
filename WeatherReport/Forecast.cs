@@ -35,6 +35,8 @@ namespace WeatherReport
 
         public static void PrintWeeklyForecast()
         {
+            Console.Clear();
+            Console.WriteLine("Please enter which city you want to view a seven-day weather forecast for");
             Console.WriteLine("1: Reyjkjavik, 2: Riga, 3: LasPalmas");
             int val = int.Parse(Console.ReadLine());
 
@@ -43,15 +45,19 @@ namespace WeatherReport
                 case 1:
                     foreach (ReykjavikForecast item in ReykjavikForecast.ReykjavikList)
                         Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                    Console.ReadLine();
+
                     break;
 
                 case 2:
                     foreach (RigaForecast item in RigaForecast.RigaList)
                         Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                    Console.ReadLine();
                     break;
                 case 3:
                     foreach (LasPalmasForecast item in LasPalmasForecast.LasPalmasList)
                         Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                    Console.ReadLine();
                     break;
 
                 default:
@@ -59,9 +65,39 @@ namespace WeatherReport
             }
 
         }
+        public static void ChoseWeatherType()
+        {
+
+            Console.WriteLine("1. Sunny");
+            Console.WriteLine("2. Rainy");
+            Console.WriteLine("3. Cloudy");
+            Console.WriteLine("4. Snowy");
+
+            int input = int.Parse(Console.ReadLine());
+
+            switch (input)
+            {
+                case 1:
+                    PrintForecastByWeather("Sunny");
+                    break;
+                case 2:
+                    PrintForecastByWeather("Rainy");
+                    break;
+                case 3:
+                    PrintForecastByWeather("Cloudy");
+                    break;
+                case 4:
+                    PrintForecastByWeather("Snowy");
+                    break;
+
+                default: break;
+            }
+        }
         public static void PrintForecastByWeather(string weather)
         {
             Console.Clear();
+
+           
 
             Console.WriteLine($"City and Day when it is {weather} weather");
             Console.WriteLine();
@@ -69,12 +105,16 @@ namespace WeatherReport
             foreach (ReykjavikForecast item in ReykjavikForecast.ReykjavikList)
                 if (item.Weathertype.TypeOfWeather == weather)
                     Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+            
             foreach (RigaForecast item in RigaForecast.RigaList)
                 if (item.Weathertype.TypeOfWeather == weather)
                     Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+         
             foreach (LasPalmasForecast item in LasPalmasForecast.LasPalmasList)
                 if (item.Weathertype.TypeOfWeather == weather)
                     Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+
+            Console.ReadLine();
 
         }
     }

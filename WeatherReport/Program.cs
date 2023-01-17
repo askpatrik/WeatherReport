@@ -11,12 +11,11 @@ namespace WeatherReport
         {
             Account.CreateAccount();
             Account.PrintAccountDetails();  
-
-
             Forecast.GenerateWeeklyForecasts();
 
+            Menu.WeatherAppMenu();
             
-            Forecast.PrintForecastByWeather("Sunny");
+            
          
           
 
