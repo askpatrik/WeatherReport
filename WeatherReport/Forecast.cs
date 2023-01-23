@@ -9,6 +9,7 @@ namespace WeatherReport
 {
     internal class Forecast
     {
+        internal static ConsoleKeyInfo input;
         public static void GenerateWeeklyForecasts()
         {
             for (int i = 0; i < 7; i++)
@@ -35,62 +36,89 @@ namespace WeatherReport
 
         public static void PrintWeeklyForecast()
         {
+            int count = 1;
             Console.Clear();
-            Console.WriteLine("Please enter which city you want to view a seven-day weather forecast for");
-            Console.WriteLine("1: Reyjkjavik, 2: Riga, 3: LasPalmas");
-            int val = int.Parse(Console.ReadLine());
 
-            switch (val)
+            Console.WriteLine("List of available cities.");
+            Console.WriteLine();
+            foreach (var item in WeatherAndCityInformation.Cities)
             {
-                case 1:
+                Console.WriteLine($"{count}: {item}");
+                count++;
+            }
+            Console.WriteLine();
+            Console.Write("Please enter which city you want to view a seven-day weather forecast for: ");
+            input = Console.ReadKey();
+
+            Console.Clear();
+            switch (input.KeyChar.ToString())
+            {
+                case "1":
                     foreach (ReykjavikForecast item in ReykjavikForecast.ReykjavikList)
-                        Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                        Console.WriteLine($"{item.CityName}, {item.DayNumber.ToString("dd MMMM")}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}°C");
                     Console.ReadLine();
-
                     break;
 
-                case 2:
+                case "2":
                     foreach (RigaForecast item in RigaForecast.RigaList)
-                        Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                        Console.WriteLine($"{item.CityName}, {item.DayNumber.ToString("dd MMMM")}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}°C");
                     Console.ReadLine();
                     break;
-                case 3:
+                case "3":
                     foreach (LasPalmasForecast item in LasPalmasForecast.LasPalmasList)
-                        Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                        Console.WriteLine($"{item.CityName}, {item.DayNumber.ToString("dd MMMM")}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}°C");
                     Console.ReadLine();
                     break;
 
                 default:
+                    Console.Clear();
+                    Console.Write("You did not enter a valid number. Press any button to return: ");
+                    Console.ReadKey();
+                    PrintWeeklyForecast();
                     break;
             }
 
         }
+        
         public static void ChoseWeatherType()
         {
+            Console.Clear();
+            int count = 1;
 
-            Console.WriteLine("1. Sunny");
-            Console.WriteLine("2. Rainy");
-            Console.WriteLine("3. Cloudy");
-            Console.WriteLine("4. Snowy");
+            Console.WriteLine("Available weather types.");
+            Console.WriteLine();
 
-            int input = int.Parse(Console.ReadLine());
-
-            switch (input)
+            foreach (var item in WeatherAndCityInformation.WeatherTypes)
             {
-                case 1:
+                Console.WriteLine($"{count}: {item.Value}");
+                count++;
+            }
+
+            Console.WriteLine();
+            Console.Write("Chose weather condition: ");
+            input = Console.ReadKey();
+
+            switch (input.KeyChar.ToString())
+            {
+                case "1":
                     PrintForecastByWeather("Sunny");
                     break;
-                case 2:
+                case "2":
                     PrintForecastByWeather("Rainy");
                     break;
-                case 3:
+                case "3":
                     PrintForecastByWeather("Cloudy");
                     break;
-                case 4:
+                case "4":
                     PrintForecastByWeather("Snowy");
                     break;
 
-                default: break;
+                default:
+                    Console.Clear();
+                    Console.Write("You did not enter a valid number. Press any button to return: ");
+                    Console.ReadKey();
+                    ChoseWeatherType();
+                    break;
             }
         }
         public static void PrintForecastByWeather(string weather)
@@ -104,15 +132,15 @@ namespace WeatherReport
 
             foreach (ReykjavikForecast item in ReykjavikForecast.ReykjavikList)
                 if (item.Weathertype.TypeOfWeather == weather)
-                    Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                    Console.WriteLine($"{item.CityName}, {item.DayNumber.ToString("dd MMMM")}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}°C");
             
             foreach (RigaForecast item in RigaForecast.RigaList)
                 if (item.Weathertype.TypeOfWeather == weather)
-                    Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                    Console.WriteLine($"{item.CityName}, {item.DayNumber.ToString("dd MMMM")}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}°C");
          
             foreach (LasPalmasForecast item in LasPalmasForecast.LasPalmasList)
                 if (item.Weathertype.TypeOfWeather == weather)
-                    Console.WriteLine($"{item.CityName}, Day {item.DayNumber}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}");
+                    Console.WriteLine($"{item.CityName}, {item.DayNumber.ToString("dd MMMM")}, Weather: {item.Weathertype.TypeOfWeather}, Temp:  {item.Weathertype.Temperature}°C");
 
             Console.ReadLine();
 

@@ -4,27 +4,14 @@
     {
         static void Main(string[] args)
         {
-            Human person1 = new Human(new Pet(5), "Patrik");
-            Console.WriteLine($"{person1.Name}'s pet is {person1.humanPet.Age} years old");
+            DateTime today = DateTime.Now;
+            Console.WriteLine(today.ToString("dd/MM/yyyy"));
+
+            var date = today.Date;
+            Console.WriteLine(date);
+
+            DateTime tomorrow = today.AddDays(1); Console.WriteLine(tomorrow);
         }
-        public class Pet
-        {
-            public Pet(int age)
-            {
-                Age = age;
-            }
-            public string Type;
-            public int Age;
-        }
-        public class Human
-        {
-            public Human(Pet pet, string name )
-            {
-                Name = name;
-                humanPet = pet;
-            }
-            public string Name;
-            public Pet humanPet;
-        }
+       
     }
 }

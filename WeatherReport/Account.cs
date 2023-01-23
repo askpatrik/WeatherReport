@@ -12,52 +12,21 @@ namespace WeatherReport
     {
         public static string Username { get; set; }
         public static string Password { get; set; }
+        public static Regex lettersAndNumbers = new Regex(@"[A-Za-z0-9]");
 
         public static void CreateAccount()
         {
-            Regex lettersAndNumbers = new Regex(@"[A-Za-z0-9]");
-            while (true)
-            {
-     
-                Console.WriteLine("Enter username");
-                string username = Console.ReadLine();
-
-                if (!lettersAndNumbers.IsMatch(username))
-                {
-                    Console.Clear();
-                    Console.WriteLine("Not a valid input. Must only contain letters and numbers");
-                    continue;
-                }
-                else if (username.Trim().Length > 8)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Not a valid input. Input can max be 8 characters long");
-                    continue;
-                }
-                else
-                    Username = username;
-                
-
-                
-                Console.WriteLine("Enter password");
-                string password = Console.ReadLine();
-                if (!lettersAndNumbers.IsMatch(password))
-                    Console.WriteLine("Not a valid input. Must only contain letters and numbers");
-                else if (password.Trim().Length > 8)
-                    Console.WriteLine("Not a valid input. Input can max be 8 characters long");
-                else
-                {
-                    Password = password;
-                    break;
-                }
-
-           
-
-            }
+            Console.WriteLine("To access the Weather app, you must first create an account.\nYou can only use letters, numbers and the input can max be 8 characters long.");
+            Console.WriteLine();
+                Console.Write("Enter username: ");
+                Username = InputHandler.ValidInput();
+                Console.Write("Enter password: ");
+                Password = InputHandler.ValidInput();                        
+            
         }
         public static void PrintAccountDetails()
         {
-            Console.WriteLine($"Account details. User name: {Account.Username}, Password: {Account.Password}");
+            Console.Write($"Account details. User name: {Account.Username}, Password: {Account.Password}.\nPress any key to continue to the Weather app!");
             Console.ReadLine();
         }
     

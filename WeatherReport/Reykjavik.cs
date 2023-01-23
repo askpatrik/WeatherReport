@@ -9,26 +9,30 @@ namespace WeatherReport
     internal class ReykjavikForecast : Cities
 
     {
-        public IWeather Weathertype { get; set; }
-
-        public ReykjavikForecast(IWeather weatherType)
+        public ReykjavikForecast(IWeather weatherType) : base(weatherType)
         {
             this.Weathertype = weatherType;
-            DayNumber = count++;
+            DayNumber = DateTime.Today.AddDays(count);
             ReykjavikList.Add(this);
-
-            WeatherInformation.MegaList.Add(this);
+            count++;
 
         }
 
-        public static int count = 1;
-        public string CityName { get => WeatherInformation.Cities[0]; }
-        public int DayNumber { get; set; }
+     
+        public override IWeather Weathertype { get; set; }
+
+
+        public static int count = 0;
+   
+        public override DateTime DayNumber { get; set; }
+            
+
+        public override string CityName { get => WeatherAndCityInformation.Cities[0]; }
+      
 
         public static List<Cities> ReykjavikList = new List<Cities>();
 
-
-
+    
     }
 }
   

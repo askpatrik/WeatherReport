@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace WeatherReport
 {
-    internal interface Cities 
+    internal abstract class Cities
     {
-       public static string CityName { get; }    
+
+        public Cities(IWeather weatherType) { }
+              
+        public abstract string CityName { get; }
+        public abstract DateTime DayNumber { get; set; }
+     
+        public abstract IWeather Weathertype { get; set; }
+
+      
     }
 }

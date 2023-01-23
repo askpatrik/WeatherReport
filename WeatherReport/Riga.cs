@@ -9,24 +9,26 @@ namespace WeatherReport
     internal class RigaForecast : Cities
 
     {
-        public IWeather Weathertype { get; set; }
-
-        public RigaForecast(IWeather weatherType)
+        internal RigaForecast(IWeather weatherType) : base(weatherType)
         {
             this.Weathertype = weatherType;
-            DayNumber = count++;
+            DayNumber = DateTime.Today.AddDays(count);
             RigaList.Add(this);
-
-            WeatherInformation.MegaList.Add(this);
+            count++;
 
         }
 
-        public static int count = 1;
-        public string CityName { get => WeatherInformation.Cities[2]; }
-        public int DayNumber { get; set; }
+        public override IWeather Weathertype { get; set; }
+
+
+        public static int count = 0;
+
+        public override DateTime DayNumber { get; set; } 
+
+        public override string CityName { get => WeatherAndCityInformation.Cities[1]; }
+
 
         public static List<Cities> RigaList = new List<Cities>();
-
 
 
     }

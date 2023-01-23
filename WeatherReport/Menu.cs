@@ -27,8 +27,8 @@ namespace WeatherReport
                     Console.WriteLine();
                    
 
-                    Console.WriteLine("1. City Seven-Day Forecasts");
-                    Console.WriteLine("2. Forecast by Weather");
+                    Console.WriteLine("1. Seven Day Forecasts");
+                    Console.WriteLine("2. Forecast by Weather Condition");
                     Console.WriteLine("3. Terminate weather app");
                     Console.WriteLine();
                     Console.Write("What do you want to do?: ");
@@ -47,10 +47,32 @@ namespace WeatherReport
                         Forecast.ChoseWeatherType();
                         break;
                         case "3":
-                        runMachine = false;
-                        Console.WriteLine("Terminating weather app in three seconds...");
-                        Thread.Sleep(3000);                 
+                        Console.Clear();
+                        Console.Write("Do you really want to terminate the weather app? (y/n): ");
+
+                        input = Console.ReadKey();
+                        if (input.KeyChar.ToString() == "n")
+                            Menu.WeatherAppMenu();
+
+                        if (input.KeyChar.ToString() == "y")
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Weather app shutting down in three seconds...");
+                            Thread.Sleep(3000);
+                            runMachine = false;
                             break;
+
+                        }
+                        break;
+
+                    default:
+                        Console.Clear();
+                        Console.Write("You did not enter a valid number. Press any button to return: ");
+                        Console.ReadKey();
+                        WeatherAppMenu();
+
+                        break;
+
 
                     }
 

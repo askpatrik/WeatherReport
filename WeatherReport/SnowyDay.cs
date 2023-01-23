@@ -9,7 +9,7 @@ namespace WeatherReport
     internal class SnowyDay: IWeather
     {
         public int Temperature { get => RandomNumberHandler.GenerateRandomTemperature(this); }
-        public string TypeOfWeather { get => WeatherInformation.WeatherTypes[GetType().Name]; }
+        public string TypeOfWeather { get => WeatherAndCityInformation.WeatherTypes[GetType().Name]; }
 
     }
 }

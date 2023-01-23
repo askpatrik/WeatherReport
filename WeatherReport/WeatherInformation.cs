@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WeatherReport
 {
-    internal class WeatherInformation
+    internal class WeatherAndCityInformation
     {
 
-        public static List<Cities> MegaList = new List<Cities>();
+     
 
         internal static Dictionary<string,string> WeatherTypes = new Dictionary<string,string>()
         {
@@ -21,8 +21,8 @@ namespace WeatherReport
         internal static List<string> Cities = new List<string>()
         {
             {"Reykjavik"},
-            {"LasPalmas"},
-            {"Riga"},        
+            {"Riga"},
+            {"LasPalmas"},        
         };
     }
 }
